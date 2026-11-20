@@ -1,7 +1,7 @@
 export function App() {
   return (
     <>
-      <div>Razorpay Practice</div>
+      <div>Expense-Tracker</div>
     </>
   );
 }

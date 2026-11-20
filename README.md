@@ -1,6 +1,6 @@
-# Razorpay Practice
+# Expense-TrackerPractice
 
-A React + TypeScript app built with Vite for Razorpay Interview Practice.
+A Expense-Tracker app built with Vite for Razorpay Interview Practice.
 
 ## Tech stack
 
@@ -20,7 +20,7 @@ A React + TypeScript app built with Vite for Razorpay Interview Practice.
 
 ```bash
 git clone <repo-url>
-cd razorpay-practice
+cd Practice-1
 npm install
 ```
 
