@@ -76,3 +76,48 @@ Lint enforces most of these. Fix the code; never work around the rule.
 - Tests cover the new behaviour, including edge cases
 - No `any`, `@ts-ignore`, empty `catch` or lint-disable comments
 - No lint rule or test was disabled, skipped or weakened to make things pass
+
+
+## Current task: Expense Tracker
+
+A single-user expense tracker. No backend.
+
+### Decisions
+- Amounts are stored in **paise** (whole numbers): ₹1,250.50 is stored as 125050.
+  Never use floats for money. Convert only when reading input and when displaying.
+- Display money with `Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" })`, e.g. ₹1,250.50
+- Categories are a fixed list: Food, Transport, Shopping, Bills, Other
+- Data is saved in localStorage under the key `expenses`
+- Each expense: `id`, `description`, `amountInPaise`, `category`, `date` (YYYY-MM-DD), `createdAt`
+- Order: newest `date` first; if dates match, newest `createdAt` first
+
+### Acceptance criteria
+Adding
+1. Valid form + Add → expense appears at the top of the list
+2. After adding, the form clears and the date resets to today
+3. The date field defaults to today
+
+Validation (error next to the field, nothing added)
+4. Empty or blank description → "Description is required"
+5. Amount 0 or negative → "Amount must be greater than 0"
+6. More than 2 decimals → "Use up to 2 decimal places"
+7. Future date → "Date can't be in the future"
+8. No category → "Category is required"
+
+List, total, filter, delete
+9. Each row shows description, category, date and amount
+10. Newest date first; same date → added last comes first
+11. Amounts show as ₹1,250.50
+12. ₹1,250.50 + ₹100 → total ₹1,350.50
+13. Filter "Food" → only Food rows, and the total is the Food total
+14. Filter "All" → all rows and the full total
+15. Delete → row disappears immediately and the total goes down
+
+Persistence and empty states
+16. Add, then reload → the expense is still there
+17. No expenses → "No expenses yet"
+18. Filter with no matches → "No expenses in this category"
+
+### Out of scope
+Editing, custom categories, multiple currencies, other filters, delete confirmation.
+Don't build any of these unless asked.
