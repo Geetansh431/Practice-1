@@ -26,7 +26,10 @@ Rules for working in this repo. Follow them for every task.
     UnitTests/PayButton.test.tsx
     E2E/PayButton.e2e.ts
   ```
+- `src/hooks/`: custom hooks that hold state and behaviour (`useExpenses.ts`). Components only render. Hooks are tested through the components that use them, not with `renderHook`.
+- `src/helpers/`: plain functions with no React, one file per topic (`money.ts`), with tests in `src/helpers/UnitTests/`.
 - Exception: `src/App.tsx` and `src/main.tsx` are the entry point. They stay in `src/` and have no tests.
+- Exception: `src/testSetup.ts` is the Vitest setup file (jest-dom matchers, cleanup after each test).
 - `lint/`: lint config (`rules.ts`), custom rules (`custom-rules/`) and their tests (`test/`)
 
 ## Code rules
@@ -100,6 +103,7 @@ Adding
 Validation (error next to the field, nothing added)
 4. Empty or blank description → "Description is required"
 5. Amount 0 or negative → "Amount must be greater than 0"
+5a. Non-numeric amount (e.g. "abc") → "Enter a valid amount"
 6. More than 2 decimals → "Use up to 2 decimal places"
 7. Future date → "Date can't be in the future"
 8. No category → "Category is required"
